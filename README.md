@@ -6,6 +6,7 @@ Some features:
  * uses the "official" word lists from New York Times as curated by [cfreshman](https://github.com/cfreshman)
  * also verifies guesses as "valid" using the list of allowed guesses, again curated by [cfreshman](https://github.com/cfreshman)
  * uses DATA step array to verify guesses against solution word. Other approaches might be to use hash object or SAS/IML, both of which would probably result in smaller code.
+ * Use DATA step object method to create a gridded output of the game board. [Credit to my SAS friends in Japan](http://sas-tumesas.blogspot.com/2022/03/wordlesasdo-overhash-iterator-object.html) for this idea! My earlier version used PROC REPORT with style attributes applied to the table cells. I've kept some of those screenshots below.
 
 To play:
  
@@ -60,6 +61,8 @@ run;
 ## Example games
 
 Here are a few screenshots of example games I played. Note that you submit each guess one at a time, of course, so you can see your status before you submit your next one!
+
+![Example game in SAS EG](./images/example-game-dsobj.png)
 
 ![Example game in SAS EG](./images/example-game-procreport.png)
 

@@ -65,23 +65,34 @@ supply 'seed' value to set the word explicitly, good for testing
   run;
 %mend;
 
-/* create a simple ODS output with the guesses so far */
+/* create a gridded output with the guesses so far */
 %macro reportStatus;
-	ods escapechar='^';
+  data _null_;
+    length background $ 50 message $ 40;
+    array c[5]  $ 40 checked1-checked5;
+    set status(obs=6) end=last;
+    /* Credit for this approach goes to my SAS friends in Japan!                          */
+    /*  http://sas-tumesas.blogspot.com/2022/03/wordlesasdo-overhash-iterator-object.html */
+    dcl odsout ob ();
+      ob.layout_gridded (columns: 5, rows: 1, column_gutter: '2mm');
+      do i=1 to 5;
+        if char(status,i) = 'G' then
+          background = "green";
+        else if char(status,i) = 'Y' then
+          background = "darkyellow";
+        else if char(status,i) = 'B' then
+          background = "gray";
+        text = cats ("color = white height = 1.5cm width = 1.5cm fontsize = 5 vjust = center background =", background);
+        ob.region ();
+        ob.table_start ();
+          ob.row_start ();
+            ob.format_cell (data: upcase(c[i]), style_attr: text);
+          ob.row_end ();
+        ob.table_end ();
+        call missing (background);
+      end;
+    ob.layout_end ();
 
-	data _report(keep=checked1-checked5);
-		array c[5]  $ 40 checked1-checked5;
-		length bg $ 6 message $ 40 solved 8;
-		set status(obs=6) end=last;
-		do i=1 to 5;
-			if char(status,i) = 'G' then
-				bg="00FF00";
-			if char(status,i) = 'Y' then
-				bg="FFFF00";
-			if char(status,i) = 'B' then
-				bg="CCCCCC";
-			c[i]=catt("^S={background=#",bg,"}",upcase(c[i]),"^S={}");
-		end;
     if status='GGGGG' then do;
      if _n_ = 1 then message = "GENIUS!";
      if _n_ = 2 then message = "MAGNIFICENT!";
@@ -95,18 +106,12 @@ supply 'seed' value to set the word explicitly, good for testing
       message=catx(' ',message,"Guess",_n_,"of 6");
       call symputx('statmsg',message);
     end;
-	run;
+  run;
 
-  proc report data=_report noheader;
-		column checked1-checked5;
-	run;
-   proc odstext;
-   p "&statmsg." 
-     / style=[color=green font_size=4 just=c fontweight=bold];
-   run;
-	proc delete data=_report;
-	run;
-
+  proc odstext;
+  p "&statmsg." 
+   / style=[color=green font_size=4 just=c fontweight=bold];
+  run;
 %mend;
 
 /* process a word guess */
