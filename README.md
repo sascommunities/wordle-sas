@@ -57,4 +57,10 @@ run;
 %guess(adieu);
 ```
 
-![Example game](./images/example-game-procreport.png)
+## Example games
+
+Here are a few screenshots of example games I played. Note that you submit each guess one at a time, of course, so you can see your status before you submit your next one!
+
+![Example game in SAS EG](./images/example-game-procreport.png)
+
+![Example game in SAS Viya](./images/example-game-sasviya.png)
