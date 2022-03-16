@@ -8,6 +8,13 @@ Some features:
  * uses DATA step array to verify guesses against solution word. Other approaches might be to use hash object or SAS/IML, both of which would probably result in smaller code.
  * Use DATA step object method to create a gridded output of the game board. [Credit to my SAS friends in Japan](http://sas-tumesas.blogspot.com/2022/03/wordlesasdo-overhash-iterator-object.html) for this idea! My earlier version used PROC REPORT with style attributes applied to the table cells. I've kept some of those screenshots below.
 
+Before putting together this repo [I asked SAS users on Twitter](https://twitter.com/cjdinger/status/1503707344907251715) what techniques they would use:
+
+![Twitter poll](./images/twitter-survey.png)
+
+For me it was always going to be arrays, since that's what I know best. The "PRX* regex functions" was sort of a trick choice, because while it seems like a good option (pattern matching!) I think the reality of it would be very tricky in SAS. But that might be a limitation of my own brain.
+
+## How to play Wordle in SAS
 To play:
  
  1. Submit the [wordle-sas.sas](./wordle-sas.sas) program in your SAS session. This program should work in PC SAS, SAS OnDemand for Academics, SAS Enterprise Guide, and SAS Viya.
