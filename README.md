@@ -34,3 +34,27 @@ To play:
      This will check the guess against the puzzle word, and it wll output a report with the familiar "status" - letters that appear in the word (yellow) and that are in the correct position (green). It will also report if the guess is not a valid guess word, and it won't count that against you as one of your 6 permitted guesses.
 
      The program keeps track of your guesses and when you solve it, it shares the familiar congratulatory message that marks the end of a Wordle session.
+
+## Start a fresh game using Git functions
+
+If you don't want to look at or copy/paste the code, you can use Git functions in SAS to bring the program into your SAS session and play. (Requires SAS 9.4 Maint 6 or later, or SAS Viya)
+
+```
+options dlcreatedir;
+%let repopath=%sysfunc(getoption(WORK))/wordle-sas;
+libname repo "&repopath.";
+data _null_;
+    rc = gitfn_clone( 
+      "https://github.com/sascommunities/wordle-sas", 
+      "&repoPath." 
+    			); 
+    put 'Git repo cloned ' rc=; 
+run;
+%include "&repopath./wordle-sas.sas";
+
+/* start a game and submit first guess */
+%startGame;
+%guess(adieu);
+```
+
+![Example game](./images/example-game-procreport.png)
