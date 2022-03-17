@@ -1,6 +1,6 @@
 # Programming the Wordle game in SAS
 
-I created this as a fun excerise to emulate the popular game Wordle in the SAS language.
+I created this as a fun exercise to emulate the popular game Wordle in the SAS language.
 
 Some features:
  * uses the "official" word lists from New York Times as curated by [cfreshman](https://github.com/cfreshman)
