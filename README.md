@@ -27,7 +27,7 @@ To play:
      ```
     This will select a random word from the word list as the "puzzle" word and store it in a SAS macro variable (don't peek!)
 
- 1. Optionally seed a game with a known word by using and optional 5-character word parameter:
+ 1. Optionally seed a game with a known word by using an optional 5-character word parameter:
      ```
      %startGame(crane);
      ```
