@@ -39,7 +39,7 @@ To play:
      %guess(adieu);
      ```
 
-     This will check the guess against the puzzle word, and it wll output a report with the familiar "status" - letters that appear in the word (yellow) and that are in the correct position (green). It will also report if the guess is not a valid guess word, and it won't count that against you as one of your 6 permitted guesses.
+     This will check the guess against the puzzle word, and it will output a report with the familiar "status" - letters that appear in the word (yellow) and that are in the correct position (green). It will also report if the guess is not a valid guess word, and it won't count that against you as one of your 6 permitted guesses.
 
      The program keeps track of your guesses and when you solve it, it shares the familiar congratulatory message that marks the end of a Wordle session.
 
