@@ -59,7 +59,7 @@ supply 'seed' value to set the word explicitly, good for testing
       run;
     %end;
   data status;
-    array check{5}  $ 8 checked1-checked5;
+    array check{5}  $ 1 checked1-checked5;
     length status $ 5;
     stop;
   run;
@@ -67,6 +67,7 @@ supply 'seed' value to set the word explicitly, good for testing
 
 /* create a gridded output with the guesses so far */
 %macro reportStatus;
+  %local statmsg;
   data _null_;
     length background $ 50 message $ 40;
     array c[5]  $ 40 checked1-checked5;
@@ -82,7 +83,7 @@ supply 'seed' value to set the word explicitly, good for testing
           background = "darkyellow";
         else if char(status,i) = 'B' then
           background = "gray";
-        text = cats ("color = white height = 1.5cm width = 1.5cm fontsize = 5 vjust = center background =", background);
+        text = cats ("color = white height = 1cm width = 1cm fontsize = 4 vjust = center background =", background);
         ob.region ();
         ob.table_start ();
           ob.row_start ();
@@ -122,7 +123,7 @@ supply 'seed' value to set the word explicitly, good for testing
 		select count(word) into :is_valid 
 			from allowed_words
 				where word="&guess.";
-	run;
+	quit;
 
 	%if &is_valid. eq 0 %then
 		%do; 
@@ -136,7 +137,7 @@ supply 'seed' value to set the word explicitly, good for testing
 		%do;
 			data _status(keep=checked: status);
         /* checked array will output our guessed letters */
-				array check{5}  $ 8 checked1-checked5;
+				array check{5}  $ 1 checked1-checked5;
         /* stat array will track guess status per position */
         /* will output to a status var at the end          */
 				array stat{5} $ 1;
