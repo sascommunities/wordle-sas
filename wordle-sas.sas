@@ -8,6 +8,7 @@
 filename words temp;
 filename words_ok temp;
 
+/*region Test*/
 /* "Official" word lists from NYT, via cfreshman GitHub sharing */
 proc http
 	url="https://gist.githubusercontent.com/cfreshman/a7b776506c73284511034e63af1017ee/raw/845966807347a7b857d53294525263408be967ce/wordle-nyt-answers-alphabetical.txt"
@@ -18,6 +19,7 @@ proc http
 	url="https://gist.githubusercontent.com/cfreshman/40608e78e83eb4e1d60b285eb7e9732f/raw/2f51b4f2bb96c02e1dee37808b2eed4ef23a3150/wordle-nyt-allowed-guesses.txt"
 	out=words_ok;
 run;
+/*endregion*/
 
 data words;
 	infile words;
